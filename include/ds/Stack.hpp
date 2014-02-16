@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <cstring>
+#include <cassert>
 
 namespace ds
 {

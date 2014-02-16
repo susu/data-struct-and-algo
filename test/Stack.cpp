@@ -1,23 +1,11 @@
-#include <igloo/igloo_alt.h>
 #include <ds/Stack.hpp>
 
-#include <random>
+#include <igloo/igloo_alt.h>
+#include "common.hpp"
 
 namespace
 {
   using namespace igloo;
-
-  std::vector<int> generateRandomVector(int numberOfElements)
-  {
-    std::vector<int> ret(numberOfElements);
-    std::random_device dev;
-    std::uniform_int_distribution<> distribution(0, 1000);
-    for (auto & i : ret)
-    {
-      i = distribution(dev);
-    }
-    return std::move(ret);
-  }
 
   Describe(AStack)
   {
