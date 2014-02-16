@@ -1,5 +1,6 @@
 #include <ds/Stack.hpp>
 
+#include <igloo/igloo.h>
 #include <igloo/igloo_alt.h>
 #include "common.hpp"
 
@@ -66,6 +67,63 @@ namespace
       {
         AssertThat(stack.pop(), Equals(i));
       });
+    }
+
+    It(should_return_the_front_element)
+    {
+      // Arrange
+      ds::Stack<int> stack;
+      stack.push(15);
+
+      // Act && Assert
+      AssertThat(stack.getFront(), Equals(15));
+      stack.push(66);
+      AssertThat(stack.getFront(), Equals(66));
+    }
+
+    Spec(pushes_and_pops_can_be_mixed)
+    {
+      ds::Stack<int> stack;
+
+      stack.push(42);
+      // ->[ 42 ]
+      AssertThat(stack.isEmpty(), Equals(false));
+      AssertThat(stack.getFront(), Equals(42));
+      AssertThat(stack.pop(), Equals(42));
+      // ->[ ]
+      AssertThat(stack.isEmpty(), Equals(true));
+
+      stack.push(99);
+      // ->[ 99 ]
+      stack.push(64);
+      // ->[ 64, 99 ]
+      AssertThat(stack.getFront(), Equals(64));
+
+      stack.push(95);
+      // ->[ 95, 64, 99 ]
+      AssertThat(stack.getFront(), Equals(95));
+
+      stack.push(44);
+      // ->[ 44, 95, 64, 99 ]
+      AssertThat(stack.getFront(), Equals(44));
+
+      AssertThat(stack.pop(), Equals(44));
+      // ->[ 95, 64, 99 ]
+      AssertThat(stack.pop(), Equals(95));
+      // ->[ 64, 99 ]
+
+      stack.push(1000);
+      // ->[ 1000, 64, 99 ]
+      AssertThat(stack.getFront(), Equals(1000));
+
+      AssertThat(stack.pop(), Equals(1000));
+      // ->[ 64, 99 ]
+      AssertThat(stack.pop(), Equals(64));
+      // ->[ 99 ]
+      AssertThat(stack.pop(), Equals(99));
+      // ->[ ]
+
+      AssertThat(stack.isEmpty(), Equals(true));
     }
   };
 }

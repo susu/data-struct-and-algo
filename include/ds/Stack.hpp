@@ -19,7 +19,7 @@ namespace ds
       {}
 
       bool isEmpty() const
-      { return true; }
+      { return m_size == 0; }
 
       void push(const T& item)
       {
@@ -30,9 +30,16 @@ namespace ds
 
       T pop()
       {
-        assert(m_size > 0);
+        assert(!isEmpty());
         return m_data[--m_size];
       }
+
+      const T& getFront() const
+      {
+        assert(!isEmpty());
+        return m_data[m_size-1];
+      }
+
     private:
       void ensureCapacity(size_t requiredCapacity)
       {
