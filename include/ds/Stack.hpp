@@ -79,7 +79,7 @@ namespace ds
             newCapacity = requiredCapacity;
 
           // Let's allocate the new buffer
-          std::unique_ptr<T[]> newData(new T[m_capacity * 2]);
+          std::unique_ptr<T[]> newData(new T[newCapacity]);
 
           // Copy the old buffer's content.
           // memcpy can be used, since we don't need the copy constructors
