@@ -88,7 +88,7 @@ namespace ds
           // Set the new buffer.
           // We must not free the old buffer, unique_ptr takes care.
           // Both reset() and release() are noexcept functions, so exception-safety is ok.
-          m_data.reset(newData.release());
+          m_data = std::move(newData);
 
           // At last, update to our new capacity.
           m_capacity = newCapacity;
